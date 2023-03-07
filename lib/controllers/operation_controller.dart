@@ -126,15 +126,18 @@ class OperationController extends ResourceController {
   }
 
   @Operation.get()
-  Future<Response> getAllOperations() async {
+  Future<Response> getAllOperations(@Bind.header(HttpHeaders.authorizationHeader) String header,) async {
     try {
+      final id = AppUtils.getIdFromHeader(header);
+      final user = await managedContext.fetchObjectWithID<User>(id);
+
       var query = Query<FinanceOperation>(managedContext)
         ..join(
           object: (x) => x.user,
         )
         ..join(
           object: (x) => x.financeOperationCategory,
-        );
+        )..where((x) => x.user!.id).equalTo(id);
 
       List<FinanceOperation> operations = await query.fetch();
 

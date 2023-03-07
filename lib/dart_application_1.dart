@@ -53,16 +53,9 @@ class AppService extends ApplicationChannel {
 
     managedContext = ManagedContext(
         ManagedDataModel.fromCurrentMirrorSystem(), persistentStore);
-
-    /* for (var element in FinanceOperationCategoryEnum.values) {
-      final qOperationCategory = Query<OperationCategory>(managedContext)
-        ..values.id = element.id
-        ..values.name = element.name;
-
-      qOperationCategory.insert();
-    }*/
-
     return super.prepare();
+
+    
   }
 
   PersistentStore _initDatabase() {

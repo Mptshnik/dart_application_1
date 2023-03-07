@@ -88,7 +88,7 @@ class AppAuthController extends ResourceController {
 
       return Response.ok(ModelResponse(
           data: userData!.backing.contents,
-          message: 'Пользователь успешно зарегался'));
+          message: 'Пользователь успешно зарегистрировался'));
     } on QueryException catch (e) {
       return Response.serverError(body: ModelResponse(message: e.message));
     }
